@@ -1,2 +1,2 @@
-# backend
-Backend do najlepszej i najszybszej aplikacji na świecie
+# Backend
+Backend do najlepszej i najszybszej aplikacji na świecie :dollar:
