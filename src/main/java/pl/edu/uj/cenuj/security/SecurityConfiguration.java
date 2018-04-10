@@ -15,16 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @EnableGlobalMethodSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//    private final AuthenticationProvider firebaseAuthenticationProvider;
-
-//    @Autowired
-//    public SecurityConfiguration(AuthenticationProvider firebaseAuthenticationProvider) {
-//        this.firebaseAuthenticationProvider = firebaseAuthenticationProvider;
-//    }
-
     @Autowired
     public void ConfigureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(firebaseAuthenticationProvider);
         auth.inMemoryAuthentication().withUser("user").password("test").roles("USER");
         auth.inMemoryAuthentication().withUser("superuser").password("test2").roles("ADMIN");
     }
@@ -36,10 +28,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/users").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/users/{id}").hasRole("ADMIN")
                 .anyRequest().permitAll().and().csrf().disable();
-    }
-
-    @Bean
-    public AuthenticationProvider firebaseAuthenticationProvider() {
-        return new FirebaseAuthenticationProvider();
     }
 }
