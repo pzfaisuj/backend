@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.edu.uj.cenuj.exceptions.UserExistException;
-import pl.edu.uj.cenuj.exceptions.UserNotFoundException;
+import pl.edu.uj.cenuj.exceptions.ProductExistException;
+import pl.edu.uj.cenuj.exceptions.ProductNotFoundException;
 
 import java.util.Date;
 
@@ -18,14 +18,14 @@ import java.util.Date;
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public final ResponseEntity handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(ProductNotFoundException.class)
+    public final ResponseEntity handleUserNotFoundException(ProductNotFoundException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UserExistException.class)
-    public final ResponseEntity handleUserExistException(UserExistException ex, WebRequest request) {
+    @ExceptionHandler(ProductExistException.class)
+    public final ResponseEntity handleUserExistException(ProductExistException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.CONFLICT);
     }
