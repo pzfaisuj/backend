@@ -15,16 +15,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void ConfigureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("test").roles("USER");
-        auth.inMemoryAuthentication().withUser("superuser").password("test2").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password("{noop}test").roles("USER");
+        auth.inMemoryAuthentication().withUser("superuser").password("{noop}test2").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().
                 authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users").hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/users/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/products").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/products/{id}").hasRole("ADMIN")
                 .anyRequest().permitAll().and().csrf().disable();
     }
 }
