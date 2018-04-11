@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.uj.cenuj.exceptions.ProductExistException;
 import pl.edu.uj.cenuj.exceptions.ProductNotFoundException;
 import pl.edu.uj.cenuj.model.Product;
-import pl.edu.uj.cenuj.repositories.ProductRepository;
+import pl.edu.uj.cenuj.repositories.ProductsRepository;
 import pl.edu.uj.cenuj.services.IProductsService;
 
 import java.util.Date;
@@ -15,16 +15,16 @@ import java.util.Optional;
 
 @Service
 public class ProductsService implements IProductsService {
-    private final ProductRepository productRepository;
+    private final ProductsRepository productsRepository;
 
     @Autowired
-    public ProductsService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductsService(ProductsRepository productsRepository) {
+        this.productsRepository = productsRepository;
     }
 
     @Override
     public Product getItemById(@NonNull String id) throws ProductNotFoundException {
-        final Optional<Product> productOptional = productRepository.findById(id);
+        final Optional<Product> productOptional = productsRepository.findById(id);
         if (productOptional.isPresent()) {
             return productOptional.get();
         }
@@ -33,37 +33,37 @@ public class ProductsService implements IProductsService {
 
     @Override
     public List<Product> getAll() {
-        return productRepository.findAll();
+        return productsRepository.findAll();
     }
 
     @Override
     public String add(@NonNull Product product) throws ProductExistException {
         if (product.getId() != null) {
-            final boolean exists = productRepository.existsById(product.getId());
+            final boolean exists = productsRepository.existsById(product.getId());
             if (exists) {
                 throw new ProductExistException("product already exists!");
             }
         }
         product.generateUniqueId();
         product.setCreationDate(new Date());
-        return productRepository.save(product).getId();
+        return productsRepository.save(product).getId();
     }
 
     @Override
     public Product change(@NonNull Product product) throws ProductNotFoundException {
-        final boolean exists = productRepository.existsById(product.getId());
+        final boolean exists = productsRepository.existsById(product.getId());
         if (!exists) {
             throw ProductNotFoundException.withDefaultMessage();
         }
-        return productRepository.save(product);
+        return productsRepository.save(product);
     }
 
     @Override
     public void delete(@NonNull String id) throws ProductNotFoundException {
-        final boolean exists = productRepository.existsById(id);
+        final boolean exists = productsRepository.existsById(id);
         if (!exists) {
             throw ProductNotFoundException.withDefaultMessage();
         }
-        productRepository.deleteById(id);
+        productsRepository.deleteById(id);
     }
 }
