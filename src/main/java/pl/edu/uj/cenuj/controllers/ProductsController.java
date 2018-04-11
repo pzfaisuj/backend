@@ -23,30 +23,30 @@ public class ProductsController {
     }
 
     @GetMapping("/products/{id}")
-    public Product getUserById(@PathVariable String id) throws ProductNotFoundException {
+    public Product getProductById(@PathVariable String id) throws ProductNotFoundException {
         return productsService.getItemById(id);
     }
 
     @GetMapping("/products")
-    public List<Product> getAllUsers() {
+    public List<Product> getAllProducts() {
         return productsService.getAll();
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Resource<String>> addUser(@RequestBody @Valid Product product) throws ProductExistException {
+    public ResponseEntity<Resource<String>> addProduct(@RequestBody @Valid Product product) throws ProductExistException {
         String id = productsService.add(product);
         Resource<String> resource = new Resource<>(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(resource);
     }
 
     @PutMapping("/products")
-    public ResponseEntity<Product> modifyUser(@RequestBody Product product) throws ProductNotFoundException {
+    public ResponseEntity<Product> modifyProduct(@RequestBody Product product) throws ProductNotFoundException {
         Product changedProduct = productsService.change(product);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(changedProduct);
     }
 
     @DeleteMapping("/products/{id}")
-    public void deleteUser(@PathVariable String id) throws ProductNotFoundException {
+    public void deleteProduct(@PathVariable String id) throws ProductNotFoundException {
         productsService.delete(id);
     }
 
