@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import pl.edu.uj.cenuj.exceptions.InvalidDateFormatException;
 import pl.edu.uj.cenuj.exceptions.ProductExistException;
 import pl.edu.uj.cenuj.exceptions.ProductNotFoundException;
 
@@ -28,6 +29,12 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity handleUserExistException(ProductExistException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public final ResponseEntity handleInvalidDateFormatException(InvalidDateFormatException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @Override
