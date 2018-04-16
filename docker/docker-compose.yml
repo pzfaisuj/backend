@@ -1,0 +1,9 @@
+version: '2.0'
+services:
+# -------------------- DB
+  mongo:
+    image: mongo
+    volumes:
+      - ./db:/data/db
+    ports:
+      - "27017:27017"
