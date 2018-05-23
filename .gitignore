@@ -58,6 +58,10 @@ cmake-build-release/
 
 # IntelliJ
 out/
+.idea/
+target/
+docker/
+cenuj-backend.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
