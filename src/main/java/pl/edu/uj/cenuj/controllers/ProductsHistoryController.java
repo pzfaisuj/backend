@@ -13,6 +13,7 @@ import pl.edu.uj.cenuj.services.IProductsHistoryService;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 public class ProductsHistoryController {
     private final IProductsHistoryService productsHistoryService;
