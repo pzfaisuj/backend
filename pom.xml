@@ -73,12 +73,6 @@
             <artifactId>h2</artifactId>
             <version>1.4.197</version>
         </dependency>
-        <!--firebase-->
-        <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>5.9.0</version>
-        </dependency>
         <!--testnq-->
         <dependency>
             <groupId>org.testng</groupId>

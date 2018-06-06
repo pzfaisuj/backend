@@ -4,8 +4,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Product {
@@ -17,7 +17,7 @@ public class Product {
     private String description;
     private String imageURL;
     private String productCode;
-    private ArrayList<String> links;
+    private List<String> links;
 
     public void generateUniqueId() {
         this.id = (new ObjectId()).toHexString();
