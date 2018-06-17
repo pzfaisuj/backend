@@ -88,4 +88,9 @@ public class ProductsHistoryService implements IProductsHistoryService {
         }
         return productsHistoryRepository.getProductHistoryByProductIdAndTimestampBetween(id, startDate, DateUtils.addDays(startDate, 1));
     }
+
+    @Override
+    public List<ProductHistory> getByProductId(String productId) {
+        return productsHistoryRepository.getProductHistoryByProductIdOrderByTimestampDesc(productId);
+    }
 }
