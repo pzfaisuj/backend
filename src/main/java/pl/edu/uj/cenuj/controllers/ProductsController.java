@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uj.cenuj.exceptions.ProductExistException;
 import pl.edu.uj.cenuj.exceptions.ProductNotFoundException;
+import pl.edu.uj.cenuj.exceptions.UnknownDomainForLinkException;
 import pl.edu.uj.cenuj.model.Product;
+import pl.edu.uj.cenuj.model.frontend.ProductWithLinks;
 import pl.edu.uj.cenuj.services.IProductsService;
 
 import javax.validation.Valid;
@@ -30,12 +32,12 @@ public class ProductsController {
 
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        return productsService.getAll();
+        return productsService.getAllProductsWithLinks();
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Resource<String>> addProduct(@RequestBody @Valid Product product) throws ProductExistException {
-        String id = productsService.add(product);
+    public ResponseEntity<Resource<String>> addProduct(@RequestBody @Valid ProductWithLinks product) throws ProductExistException, UnknownDomainForLinkException, ProductNotFoundException {
+        String id = productsService.addProductWithLinks(product);
         Resource<String> resource = new Resource<>(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(resource);
     }

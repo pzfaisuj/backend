@@ -28,6 +28,11 @@ public class ProductsHistoryController {
         return productsHistoryService.getItemById(id);
     }
 
+    @GetMapping("/products-history/product/{productId}")
+    public List<ProductHistory> getProductHistoryByProductId(@PathVariable String productId) throws ProductNotFoundException {
+        return productsHistoryService.getByProductId(productId);
+    }
+
     @GetMapping("/products-history")
     public List<ProductHistory> getAllProductsHistory() {
         return productsHistoryService.getAll();
