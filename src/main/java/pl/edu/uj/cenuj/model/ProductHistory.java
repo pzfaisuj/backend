@@ -20,6 +20,13 @@ public class ProductHistory {
     @JsonFormat(shape=JsonFormat.Shape.NUMBER, pattern="s")
     private Date timestamp;
 
+    public ProductHistory(String productLinkId, String productId, Double price, Date timestamp) {
+        this.productLinkId = productLinkId;
+        this.productId = productId;
+        this.price = price;
+        this.timestamp = timestamp;
+    }
+
     public void generateUniqueId() {
         this.id = (new ObjectId()).toHexString();
     }

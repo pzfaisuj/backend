@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ProductLinkRepository extends MongoRepository<ProductLink, String> {
     List<ProductLink> findAllByProductCode(long productCode);
+
+    List<ProductLink> findAllByDomainName(String domainName);
 }
