@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ProductsHistoryRepository extends MongoRepository<ProductHistory, String> {
     List<ProductHistory> getProductHistoryByProductIdAndTimestampBetween(String id, Date startDay, Date endDay);
+
+    List<ProductHistory> getProductHistoryByProductIdOrderByTimestampDesc(String productId);
 }

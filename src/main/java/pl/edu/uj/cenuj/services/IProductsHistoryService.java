@@ -19,4 +19,6 @@ public interface IProductsHistoryService {
     void delete(String id) throws ProductNotFoundException;
 
     List<ProductHistory> getAllFromDay(String id, String day) throws InvalidDateFormatException;
+
+    List<ProductHistory> getByProductId(String productId);
 }
