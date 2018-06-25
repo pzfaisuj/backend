@@ -15,7 +15,6 @@ import pl.edu.uj.cenuj.repositories.ProductsRepository;
 import pl.edu.uj.cenuj.services.IProductScrapService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,12 +47,11 @@ public class ProductScrapService implements IProductScrapService {
     }
 
     @Override
-    public void addProductsHistory(List<ScrappedProductLinks> scrappedProductLinks) {
-        scrappedProductLinks.forEach(scrappedProductLink ->
-                productLinkRepository.findById(scrappedProductLink.getProductLinkId()).ifPresent(productLink ->
-                        productsRepository.findByProductCode(productLink.getProductCode()).ifPresent(product -> {
-                            final ProductHistory productHistory = new ProductHistory(productLink.getId(), product.getId(), scrappedProductLink.getPrice(), scrappedProductLink.getTimestamp());
-                            productsHistoryRepository.save(productHistory);
-                        })));
+    public void addProductsHistory(ScrappedProductLinks scrappedProductLink) {
+        productLinkRepository.findById(scrappedProductLink.getProductLinkId()).ifPresent(productLink ->
+                productsRepository.findByProductCode(productLink.getProductCode()).ifPresent(product -> {
+                    final ProductHistory productHistory = new ProductHistory(productLink.getId(), product.getId(), scrappedProductLink.getPrice(), scrappedProductLink.getTimestamp());
+                    productsHistoryRepository.save(productHistory);
+                }));
     }
 }

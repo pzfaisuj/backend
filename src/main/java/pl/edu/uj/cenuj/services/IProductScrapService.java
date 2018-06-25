@@ -8,5 +8,5 @@ import java.util.List;
 public interface IProductScrapService {
     List<ScrapData> getProductsToScrap();
 
-    void addProductsHistory(List<ScrappedProductLinks> scrappedProductLinks);
+    void addProductsHistory(ScrappedProductLinks scrappedProductLink);
 }
