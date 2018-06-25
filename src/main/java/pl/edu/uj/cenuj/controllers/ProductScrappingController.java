@@ -33,7 +33,7 @@ public class ProductScrappingController {
     }
 
     @PostMapping("/scrap")
-    public ResponseEntity<String> addNewProducts(@RequestBody @Valid List<ScrappedProductLinks> scrappedProductLinks) {
+    public ResponseEntity<String> addNewProducts(@RequestBody @Valid ScrappedProductLinks scrappedProductLinks) {
         log.info("got products to scrap");
         productScrapService.addProductsHistory(scrappedProductLinks);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("product history will be processed");
